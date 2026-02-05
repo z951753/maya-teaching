@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: maya-teaching
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+    region: oregon
+    disk:
+      name: maya-teaching-storage
+      mountPath: /app/data
+      sizeGB: 1
+    healthCheckPath: /
+    autoDeploy: true
+    repo: https://github.com/yourusername/maya-teaching

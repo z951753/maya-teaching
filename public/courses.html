@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程管理 - Maya三维动画讲课平台</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <i class="fas fa-cube"></i>
+                <span>Maya教学平台</span>
+            </div>
+            <div class="navbar-links">
+                <a href="/" class="nav-link" data-section="home">首页</a>
+                <a href="/courses.html" class="nav-link active" data-section="courses">课程管理</a>
+                <a href="/materials.html" class="nav-link" data-section="materials">资料管理</a>
+                <a href="/notes.html" class="nav-link" data-section="notes">教学笔记</a>
+                <a href="/maya.html" class="nav-link" data-section="maya">Maya工具</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-outline" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-primary" id="add-course-btn">
+                    <i class="fas fa-plus"></i> 新建课程
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>课程管理</h1>
+            <p>创建和管理Maya三维动画相关课程</p>
+        </div>
+    </section>
+
+    <!-- 课程列表 -->
+    <section class="courses-section">
+        <div class="container">
+            <!-- 搜索和筛选 -->
+            <div class="courses-filter">
+                <div class="search-box">
+                    <input type="text" id="course-search" placeholder="搜索课程...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select id="course-category">
+                        <option value="">所有分类</option>
+                        <option value="建模">建模</option>
+                        <option value="动画">动画</option>
+                        <option value="材质">材质</option>
+                        <option value="灯光">灯光</option>
+                        <option value="渲染">渲染</option>
+                        <option value="特效">特效</option>
+                    </select>
+                    <select id="course-sort">
+                        <option value="created_at">创建时间</option>
+                        <option value="title">课程名称</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 课程网格 -->
+            <div class="courses-grid" id="courses-container">
+                <!-- 课程卡片将通过JavaScript动态生成 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20modeling%20tutorial%20concept%2C%20Maya%20software%20interface%2C%20professional%203D%20modeling%20workflow&image_size=square" alt="Maya建模基础">
+                    </div>
+                    <div class="course-content">
+                        <h3>Maya建模基础</h3>
+                        <p>掌握多边形建模的基本技巧和工作流程，包括顶点、边、面的编辑方法</p>
+                        <div class="course-meta">
+                            <span class="category">建模</span>
+                            <span class="date">2026-02-01</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-sm btn-primary view-course" data-id="course_1">
+                                <i class="fas fa-eye"></i> 查看
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-course" data-id="course_1">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-course" data-id="course_1">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20animation%20tutorial%20concept%2C%20character%20animation%20in%20Maya%2C%20keyframe%20animation%20workflow&image_size=square" alt="Maya动画基础">
+                    </div>
+                    <div class="course-content">
+                        <h3>Maya动画基础</h3>
+                        <p>学习关键帧动画和角色动画的基本原理，掌握动画曲线编辑技巧</p>
+                        <div class="course-meta">
+                            <span class="category">动画</span>
+                            <span class="date">2026-01-28</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-sm btn-primary view-course" data-id="course_2">
+                                <i class="fas fa-eye"></i> 查看
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-course" data-id="course_2">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-course" data-id="course_2">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20texturing%20and%20shading%20tutorial%2C%20Maya%20material%20editor%2C%20PBR%20workflow&image_size=square" alt="Maya材质与渲染">
+                    </div>
+                    <div class="course-content">
+                        <h3>Maya材质与渲染</h3>
+                        <p>掌握PBR材质和Arnold渲染的高级技巧，创建真实感的材质效果</p>
+                        <div class="course-meta">
+                            <span class="category">材质/渲染</span>
+                            <span class="date">2026-01-25</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-sm btn-primary view-course" data-id="course_3">
+                                <i class="fas fa-eye"></i> 查看
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-course" data-id="course_3">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-course" data-id="course_3">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination" id="course-pagination">
+                <button class="page-btn disabled"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程详情模态框 -->
+    <div class="modal" id="course-detail-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>课程详情</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="course-detail">
+                    <div class="course-detail-header">
+                        <div class="course-detail-image">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20modeling%20tutorial%20concept%2C%20Maya%20software%20interface&image_size=landscape_16_9" alt="课程封面">
+                        </div>
+                        <div class="course-detail-info">
+                            <h2 id="detail-course-title">Maya建模基础</h2>
+                            <p id="detail-course-description">掌握多边形建模的基本技巧和工作流程，包括顶点、边、面的编辑方法</p>
+                            <div class="course-detail-meta">
+                                <span class="meta-item"><i class="fas fa-tag"></i> 建模</span>
+                                <span class="meta-item"><i class="fas fa-calendar"></i> 2026-02-01</span>
+                                <span class="meta-item"><i class="fas fa-clock"></i> 10课时</span>
+                            </div>
+                            <div class="course-detail-tags">
+                                <span class="tag">多边形建模</span>
+                                <span class="tag">硬表面建模</span>
+                                <span class="tag">拓扑优化</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-detail-content">
+                        <div class="detail-section">
+                            <h3><i class="fas fa-list"></i> 课程大纲</h3>
+                            <ul class="course-outline">
+                                <li>
+                                    <span class="outline-title">1. 课程介绍</span>
+                                    <span class="outline-duration">15分钟</span>
+                                </li>
+                                <li>
+                                    <span class="outline-title">2. Maya界面熟悉</span>
+                                    <span class="outline-duration">30分钟</span>
+                                </li>
+                                <li>
+                                    <span class="outline-title">3. 多边形基本操作</span>
+                                    <span class="outline-duration">45分钟</span>
+                                </li>
+                                <li>
+                                    <span class="outline-title">4. 硬表面建模技巧</span>
+                                    <span class="outline-duration">60分钟</span>
+                                </li>
+                                <li>
+                                    <span class="outline-title">5. 拓扑优化方法</span>
+                                    <span class="outline-duration">45分钟</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3><i class="fas fa-folder-open"></i> 相关资料</h3>
+                            <div class="related-materials">
+                                <div class="material-item">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>Maya建模基础教程.pdf</span>
+                                    <button class="material-action"><i class="fas fa-download"></i></button>
+                                </div>
+                                <div class="material-item">
+                                    <i class="fas fa-file-video"></i>
+                                    <span>多边形建模技巧.mp4</span>
+                                    <button class="material-action"><i class="fas fa-play"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3><i class="fas fa-sticky-note"></i> 教学笔记</h3>
+                            <div class="related-notes">
+                                <div class="note-item">
+                                    <h4>多边形建模常见问题</h4>
+                                    <p>整理了学生在多边形建模过程中常见的问题和解决方案</p>
+                                    <button class="note-action"><i class="fas fa-eye"></i> 查看</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="edit-detail-course">编辑课程</button>
+                <button class="btn btn-danger" id="delete-detail-course">删除课程</button>
+                <button class="btn btn-primary" id="close-detail-modal">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 创建课程模态框 -->
+    <div class="modal" id="create-course-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>新建课程</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="create-course-form">
+                    <div class="form-group">
+                        <label for="course-title">课程名称 *</label>
+                        <input type="text" id="course-title" required placeholder="输入课程名称">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course-description">课程描述 *</label>
+                        <textarea id="course-description" rows="4" required placeholder="输入课程描述"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="course-category">课程分类 *</label>
+                            <select id="course-category" required>
+                                <option value="">选择分类</option>
+                                <option value="建模">建模</option>
+                                <option value="动画">动画</option>
+                                <option value="材质">材质</option>
+                                <option value="灯光">灯光</option>
+                                <option value="渲染">渲染</option>
+                                <option value="特效">特效</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label for="course-duration">课时数</label>
+                            <input type="number" id="course-duration" placeholder="输入课时数">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course-tags">课程标签</label>
+                        <input type="text" id="course-tags" placeholder="输入标签，用逗号分隔">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course-outline">课程大纲</label>
+                        <div class="outline-editor">
+                            <div class="outline-header">
+                                <h4>课程大纲</h4>
+                                <button type="button" class="btn btn-sm btn-primary" id="add-outline-item">
+                                    <i class="fas fa-plus"></i> 添加章节
+                                </button>
+                            </div>
+                            <div class="outline-items" id="outline-items">
+                                <div class="outline-item">
+                                    <input type="text" placeholder="章节标题">
+                                    <input type="text" placeholder="时长 (如：45分钟)">
+                                    <button type="button" class="btn btn-sm btn-danger remove-outline-item">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course-cover">课程封面</label>
+                        <div class="file-upload">
+                            <input type="file" id="course-cover" accept="image/*">
+                            <label for="course-cover" class="file-upload-label">
+                                <i class="fas fa-upload"></i>
+                                <span>选择图片</span>
+                            </label>
+                            <div class="file-preview" id="cover-preview">
+                                <img src="" alt="封面预览" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-create-course">取消</button>
+                <button class="btn btn-primary" id="submit-create-course">创建课程</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑课程模态框 -->
+    <div class="modal" id="edit-course-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>编辑课程</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-course-form">
+                    <!-- 表单内容与创建课程相同，将通过JavaScript填充数据 -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-edit-course">取消</button>
+                <button class="btn btn-primary" id="submit-edit-course">保存更改</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除模态框 -->
+    <div class="modal" id="delete-confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除此课程吗？此操作不可恢复。</p>
+                <p class="delete-course-name">课程名称：Maya建模基础</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-delete">取消</button>
+                <button class="btn btn-danger" id="confirm-delete">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Maya教学平台</h3>
+                    <p>专为三维动画教师打造的备课资料管理系统</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/courses.html">课程管理</a></li>
+                        <li><a href="/materials.html">资料管理</a></li>
+                        <li><a href="/notes.html">教学笔记</a></li>
+                        <li><a href="/maya.html">Maya工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@maya-teaching.com</li>
+                        <li><i class="fas fa-phone"></i> +86 123 4567 8910</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Maya教学平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="/js/courses.js"></script>
+</body>
+</html>

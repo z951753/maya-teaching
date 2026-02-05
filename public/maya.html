@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya工具 - Maya三维动画讲课平台</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/maya.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <i class="fas fa-cube"></i>
+                <span>Maya教学平台</span>
+            </div>
+            <div class="navbar-links">
+                <a href="/" class="nav-link" data-section="home">首页</a>
+                <a href="/courses.html" class="nav-link" data-section="courses">课程管理</a>
+                <a href="/materials.html" class="nav-link" data-section="materials">资料管理</a>
+                <a href="/notes.html" class="nav-link" data-section="notes">教学笔记</a>
+                <a href="/maya.html" class="nav-link active" data-section="maya">Maya工具</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-outline" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-primary" id="add-command-btn">
+                    <i class="fas fa-plus"></i> 添加命令
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Maya工具</h1>
+            <p>Maya三维动画软件的命令参考、快捷键指南和插件推荐</p>
+        </div>
+    </section>
+
+    <!-- Maya工具内容 -->
+    <section class="maya-section">
+        <div class="container">
+            <!-- 工具导航 -->
+            <div class="maya-nav">
+                <button class="nav-btn active" data-tab="commands">
+                    <i class="fas fa-terminal"></i> 命令参考
+                </button>
+                <button class="nav-btn" data-tab="shortcuts">
+                    <i class="fas fa-keyboard"></i> 快捷键指南
+                </button>
+                <button class="nav-btn" data-tab="plugins">
+                    <i class="fas fa-puzzle-piece"></i> 插件推荐
+                </button>
+                <button class="nav-btn" data-tab="scripts">
+                    <i class="fas fa-code"></i> 脚本示例
+                </button>
+            </div>
+
+            <!-- 工具内容 -->
+            <div class="maya-content">
+                <!-- 命令参考 -->
+                <div class="tab-content active" id="commands-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-terminal"></i> 命令参考</h2>
+                        <p>常用Maya命令的详细说明和使用方法</p>
+                    </div>
+
+                    <!-- 命令搜索和筛选 -->
+                    <div class="command-filter">
+                        <div class="search-box">
+                            <input type="text" id="command-search" placeholder="搜索命令...">
+                            <button class="search-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="filter-options">
+                            <select id="command-category">
+                                <option value="">所有分类</option>
+                                <option value="建模">建模</option>
+                                <option value="动画">动画</option>
+                                <option value="材质">材质</option>
+                                <option value="渲染">渲染</option>
+                                <option value="特效">特效</option>
+                                <option value="通用">通用</option>
+                            </select>
+                            <select id="command-language">
+                                <option value="">所有语言</option>
+                                <option value="MEL">MEL</option>
+                                <option value="Python">Python</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 命令列表 -->
+                    <div class="commands-grid" id="commands-grid">
+                        <!-- 命令卡片将通过JavaScript动态生成 -->
+                        <div class="command-card">
+                            <div class="command-header">
+                                <h3>polyCube</h3>
+                                <span class="command-category-badge">建模</span>
+                            </div>
+                            <div class="command-content">
+                                <div class="command-language">
+                                    <span class="language-badge">MEL</span>
+                                </div>
+                                <p class="command-description">创建多边形立方体</p>
+                                <div class="command-syntax">
+                                    <h4>语法</h4>
+                                    <code>polyCube [-width #] [-height #] [-depth #] [-subdivisionsWidth #] [-subdivisionsHeight #] [-subdivisionsDepth #] [-axisX #] [-axisY #] [-axisZ #] [-createUVs string] [-name string]</code>
+                                </div>
+                                <div class="command-usage">
+                                    <h4>示例</h4>
+                                    <code>polyCube -w 10 -h 20 -d 5 -sw 2 -sh 4 -sd 2</code>
+                                </div>
+                            </div>
+                            <div class="command-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                            </div>
+                        </div>
+
+                        <div class="command-card">
+                            <div class="command-header">
+                                <h3>sphere</h3>
+                                <span class="command-category-badge">建模</span>
+                            </div>
+                            <div class="command-content">
+                                <div class="command-language">
+                                    <span class="language-badge">MEL</span>
+                                </div>
+                                <p class="command-description">创建球体</p>
+                                <div class="command-syntax">
+                                    <h4>语法</h4>
+                                    <code>sphere [-radius #] [-subdivisionsX #] [-subdivisionsY #] [-axisX #] [-axisY #] [-axisZ #] [-createUVs string] [-name string]</code>
+                                </div>
+                                <div class="command-usage">
+                                    <h4>示例</h4>
+                                    <code>sphere -r 8 -sx 20 -sy 15</code>
+                                </div>
+                            </div>
+                            <div class="command-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                            </div>
+                        </div>
+
+                        <div class="command-card">
+                            <div class="command-header">
+                                <h3>setKeyframe</h3>
+                                <span class="command-category-badge">动画</span>
+                            </div>
+                            <div class="command-content">
+                                <div class="command-language">
+                                    <span class="language-badge">MEL</span>
+                                </div>
+                                <p class="command-description">设置关键帧</p>
+                                <div class="command-syntax">
+                                    <h4>语法</h4>
+                                    <code>setKeyframe [-breakdown boolean] [-controlPoints boolean] [-hierarchy string] [-insert boolean] [-time string] [-value #] [-attribute string] [-channelBox boolean] [-shape boolean] objects</code>
+                                </div>
+                                <div class="command-usage">
+                                    <h4>示例</h4>
+                                    <code>setKeyframe -attribute "translateX" -time 1 -value 0 pCube1</code>
+                                </div>
+                            </div>
+                            <div class="command-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                            </div>
+                        </div>
+
+                        <div class="command-card">
+                            <div class="command-header">
+                                <h3>cmds.polySphere</h3>
+                                <span class="command-category-badge">建模</span>
+                            </div>
+                            <div class="command-content">
+                                <div class="command-language">
+                                    <span class="language-badge">Python</span>
+                                </div>
+                                <p class="command-description">Python版本的创建球体命令</p>
+                                <div class="command-syntax">
+                                    <h4>语法</h4>
+                                    <code>cmds.polySphere(radius=1.0, subdivisionsX=20, subdivisionsY=20, axis=(0, 1, 0), name='sphere1')</code>
+                                </div>
+                                <div class="command-usage">
+                                    <h4>示例</h4>
+                                    <code>import maya.cmds as cmds
+cmds.polySphere(r=5, sx=16, sy=12, name='mySphere')</code>
+                                </div>
+                            </div>
+                            <div class="command-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 快捷键指南 -->
+                <div class="tab-content" id="shortcuts-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-keyboard"></i> 快捷键指南</h2>
+                        <p>Maya常用快捷键的参考指南</p>
+                    </div>
+
+                    <!-- 快捷键分类 -->
+                    <div class="shortcuts-container">
+                        <div class="shortcuts-category">
+                            <h3><i class="fas fa-cube"></i> 建模快捷键</h3>
+                            <div class="shortcuts-list">
+                                <div class="shortcut-item">
+                                    <kbd>Q</kbd>
+                                    <span>选择工具</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>W</kbd>
+                                    <span>移动工具</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>E</kbd>
+                                    <span>旋转工具</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>R</kbd>
+                                    <span>缩放工具</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>F</kbd>
+                                    <span>聚焦选择</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Shift+D</kbd>
+                                    <span>复制并移动</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl+D</kbd>
+                                    <span>复制</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Delete</kbd>
+                                    <span>删除</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-category">
+                            <h3><i class="fas fa-film"></i> 动画快捷键</h3>
+                            <div class="shortcuts-list">
+                                <div class="shortcut-item">
+                                    <kbd>S</kbd>
+                                    <span>设置关键帧</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Alt+V</kbd>
+                                    <span>播放/停止</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>,</kbd>
+                                    <span>前一帧</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>.</kbd>
+                                    <span>后一帧</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Home</kbd>
+                                    <span>第一帧</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>End</kbd>
+                                    <span>最后一帧</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>K</kbd>
+                                    <span>关键帧模式</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Alt+K</kbd>
+                                    <span>曲线编辑器</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-category">
+                            <h3><i class="fas fa-palette"></i> 材质快捷键</h3>
+                            <div class="shortcuts-list">
+                                <div class="shortcut-item">
+                                    <kbd>6</kbd>
+                                    <span>材质模式</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>7</kbd>
+                                    <span>纹理模式</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>8</kbd>
+                                    <span>灯光模式</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>9</kbd>
+                                    <span>渲染模式</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Shift+A</kbd>
+                                    <span>显示/隐藏属性编辑器</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl+A</kbd>
+                                    <span>显示属性编辑器</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-category">
+                            <h3><i class="fas fa-random"></i> 视图快捷键</h3>
+                            <div class="shortcuts-list">
+                                <div class="shortcut-item">
+                                    <kbd>Space</kbd>
+                                    <span>视图切换</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Alt+鼠标左键</kbd>
+                                    <span>旋转视图</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Alt+鼠标中键</kbd>
+                                    <span>平移视图</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Alt+鼠标右键</kbd>
+                                    <span>缩放视图</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>1</kbd>
+                                    <span>线框模式</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>2</kbd>
+                                    <span>平滑着色</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>3</kbd>
+                                    <span>平滑着色+材质</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 插件推荐 -->
+                <div class="tab-content" id="plugins-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-puzzle-piece"></i> 插件推荐</h2>
+                        <p>实用的Maya插件和扩展工具</p>
+                    </div>
+
+                    <!-- 插件列表 -->
+                    <div class="plugins-grid" id="plugins-grid">
+                        <!-- 插件卡片将通过JavaScript动态生成 -->
+                        <div class="plugin-card">
+                            <div class="plugin-header">
+                                <h3>Arnold</h3>
+                                <span class="plugin-category-badge">渲染</span>
+                            </div>
+                            <div class="plugin-content">
+                                <div class="plugin-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>5.0</span>
+                                </div>
+                                <p class="plugin-description">强大的物理渲染器，支持全局光照和真实材质</p>
+                                <div class="plugin-info">
+                                    <span class="info-item"><i class="fas fa-download"></i> 免费</span>
+                                    <span class="info-item"><i class="fas fa-code-branch"></i> 官方插件</span>
+                                    <span class="info-item"><i class="fas fa-compatibility"></i> Maya 2018+</span>
+                                </div>
+                            </div>
+                            <div class="plugin-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-external-link-alt"></i> 官网</button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-info-circle"></i> 详情</button>
+                            </div>
+                        </div>
+
+                        <div class="plugin-card">
+                            <div class="plugin-header">
+                                <h3>Substance Painter</h3>
+                                <span class="plugin-category-badge">材质</span>
+                            </div>
+                            <div class="plugin-content">
+                                <div class="plugin-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.5</span>
+                                </div>
+                                <p class="plugin-description">专业的PBR材质绘制软件，支持Maya无缝集成</p>
+                                <div class="plugin-info">
+                                    <span class="info-item"><i class="fas fa-download"></i> 付费</span>
+                                    <span class="info-item"><i class="fas fa-code-branch"></i> 第三方</span>
+                                    <span class="info-item"><i class="fas fa-compatibility"></i> Maya 2016+</span>
+                                </div>
+                            </div>
+                            <div class="plugin-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-external-link-alt"></i> 官网</button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-info-circle"></i> 详情</button>
+                            </div>
+                        </div>
+
+                        <div class="plugin-card">
+                            <div class="plugin-header">
+                                <h3>ZBrush Bridge</h3>
+                                <span class="plugin-category-badge">建模</span>
+                            </div>
+                            <div class="plugin-content">
+                                <div class="plugin-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>4.0</span>
+                                </div>
+                                <p class="plugin-description">ZBrush和Maya之间的无缝桥接工具</p>
+                                <div class="plugin-info">
+                                    <span class="info-item"><i class="fas fa-download"></i> 免费</span>
+                                    <span class="info-item"><i class="fas fa-code-branch"></i> 官方插件</span>
+                                    <span class="info-item"><i class="fas fa-compatibility"></i> Maya 2017+</span>
+                                </div>
+                            </div>
+                            <div class="plugin-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-external-link-alt"></i> 官网</button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-info-circle"></i> 详情</button>
+                            </div>
+                        </div>
+
+                        <div class="plugin-card">
+                            <div class="plugin-header">
+                                <h3>Redshift</h3>
+                                <span class="plugin-category-badge">渲染</span>
+                            </div>
+                            <div class="plugin-content">
+                                <div class="plugin-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>5.0</span>
+                                </div>
+                                <p class="plugin-description">GPU加速渲染器，速度快，质量高</p>
+                                <div class="plugin-info">
+                                    <span class="info-item"><i class="fas fa-download"></i> 付费</span>
+                                    <span class="info-item"><i class="fas fa-code-branch"></i> 第三方</span>
+                                    <span class="info-item"><i class="fas fa-compatibility"></i> Maya 2016+</span>
+                                </div>
+                            </div>
+                            <div class="plugin-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-external-link-alt"></i> 官网</button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-info-circle"></i> 详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 脚本示例 -->
+                <div class="tab-content" id="scripts-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-code"></i> 脚本示例</h2>
+                        <p>实用的MEL和Python脚本示例</p>
+                    </div>
+
+                    <!-- 脚本分类 -->
+                    <div class="scripts-container">
+                        <div class="script-category">
+                            <h3><i class="fas fa-cube"></i> 建模脚本</h3>
+                            <div class="script-list">
+                                <div class="script-item">
+                                    <h4>批量创建几何体</h4>
+                                    <div class="script-language">Python</div>
+                                    <pre class="script-code">import maya.cmds as cmds
+
+# 创建多个立方体
+for i in range(5):
+    for j in range(5):
+        cmds.polyCube(name=f'cube_{i}_{j}')
+        cmds.move(i*2, 0, j*2, f'cube_{i}_{j}')
+
+print('创建完成！')</pre>
+                                    <div class="script-actions">
+                                        <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                        <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                                    </div>
+                                </div>
+
+                                <div class="script-item">
+                                    <h4>自动平滑网格</h4>
+                                    <div class="script-language">MEL</div>
+                                    <pre class="script-code">// 自动平滑选中的网格
+string $sel[] = `ls -sl`;
+for ($obj in $sel) {
+    polySoftEdge -a 180 $obj;
+    print ($obj + " 已平滑\n");
+}
+print ("平滑完成！");
+</pre>
+                                    <div class="script-actions">
+                                        <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                        <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="script-category">
+                            <h3><i class="fas fa-film"></i> 动画脚本</h3>
+                            <div class="script-list">
+                                <div class="script-item">
+                                    <h4>批量设置关键帧</h4>
+                                    <div class="script-language">Python</div>
+                                    <pre class="script-code">import maya.cmds as cmds
+
+# 为选中的对象设置关键帧
+selected = cmds.ls(selection=True)
+if selected:
+    for obj in selected:
+        # 设置 translateX 关键帧
+        cmds.setKeyframe(obj, attribute='translateX', time=1, value=0)
+        cmds.setKeyframe(obj, attribute='translateX', time=10, value=10)
+        # 设置 translateY 关键帧
+        cmds.setKeyframe(obj, attribute='translateY', time=1, value=0)
+        cmds.setKeyframe(obj, attribute='translateY', time=10, value=5)
+    print('关键帧设置完成！')
+else:
+    print('请先选择对象！')</pre>
+                                    <div class="script-actions">
+                                        <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                        <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="script-category">
+                            <h3><i class="fas fa-lightbulb"></i> 工具脚本</h3>
+                            <div class="script-list">
+                                <div class="script-item">
+                                    <h4>清除无用节点</h4>
+                                    <div class="script-language">MEL</div>
+                                    <pre class="script-code">// 清除场景中的无用节点
+string $unused[] = `ls -type "unknown"`;
+for ($node in $unused) {
+    delete $node;
+}
+
+// 清除空组
+string $emptyGroups[] = `ls -empty -g`;
+for ($group in $emptyGroups) {
+    delete $group;
+}
+
+print("无用节点已清除！");
+</pre>
+                                    <div class="script-actions">
+                                        <button class="btn btn-sm btn-outline"><i class="fas fa-copy"></i> 复制</button>
+                                        <button class="btn btn-sm btn-primary"><i class="fas fa-play"></i> 运行</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 添加命令模态框 -->
+    <div class="modal" id="add-command-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> 添加命令</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-command-form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="command-name">命令名称 *</label>
+                            <input type="text" id="command-name" required placeholder="例如：polyCube">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="command-category-add">分类 *</label>
+                            <select id="command-category-add" required>
+                                <option value="建模">建模</option>
+                                <option value="动画">动画</option>
+                                <option value="材质">材质</option>
+                                <option value="渲染">渲染</option>
+                                <option value="特效">特效</option>
+                                <option value="通用">通用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="command-language-add">语言 *</label>
+                            <select id="command-language-add" required>
+                                <option value="MEL">MEL</option>
+                                <option value="Python">Python</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="command-version">适用版本</label>
+                            <input type="text" id="command-version" placeholder="例如：Maya 2018+">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="command-description">描述 *</label>
+                        <textarea id="command-description" rows="3" required placeholder="命令的详细描述"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="command-syntax">语法 *</label>
+                        <textarea id="command-syntax" rows="3" required placeholder="命令的语法格式"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="command-usage">示例</label>
+                        <textarea id="command-usage" rows="3" placeholder="命令的使用示例"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="command-notes">备注</label>
+                        <textarea id="command-notes" rows="2" placeholder="其他备注信息"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-add-command">取消</button>
+                <button class="btn btn-primary" id="submit-add-command">添加命令</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 命令详情模态框 -->
+    <div class="modal" id="command-detail-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-terminal"></i> 命令详情</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="command-detail" id="command-detail-content">
+                    <!-- 命令详情将通过JavaScript动态生成 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="close-command-detail">关闭</button>
+                <button class="btn btn-primary" id="run-command-detail">运行命令</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Maya教学平台</h3>
+                    <p>专为三维动画教师打造的备课资料管理系统</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/courses.html">课程管理</a></li>
+                        <li><a href="/materials.html">资料管理</a></li>
+                        <li><a href="/notes.html">教学笔记</a></li>
+                        <li><a href="/maya.html">Maya工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@maya-teaching.com</li>
+                        <li><i class="fas fa-phone"></i> +86 123 4567 8910</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Maya教学平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="/js/maya.js"></script>
+</body>
+</html>

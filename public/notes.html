@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教学笔记 - Maya三维动画讲课平台</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/notes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <i class="fas fa-cube"></i>
+                <span>Maya教学平台</span>
+            </div>
+            <div class="navbar-links">
+                <a href="/" class="nav-link" data-section="home">首页</a>
+                <a href="/courses.html" class="nav-link" data-section="courses">课程管理</a>
+                <a href="/materials.html" class="nav-link" data-section="materials">资料管理</a>
+                <a href="/notes.html" class="nav-link active" data-section="notes">教学笔记</a>
+                <a href="/maya.html" class="nav-link" data-section="maya">Maya工具</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-outline" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-primary" id="create-note-btn">
+                    <i class="fas fa-plus"></i> 新建笔记
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>教学笔记</h1>
+            <p>创建和管理Maya三维动画教学笔记</p>
+        </div>
+    </section>
+
+    <!-- 笔记管理 -->
+    <section class="notes-section">
+        <div class="container">
+            <!-- 笔记列表和编辑器 -->
+            <div class="notes-container">
+                <!-- 左侧笔记列表 -->
+                <div class="notes-sidebar">
+                    <!-- 搜索和筛选 -->
+                    <div class="sidebar-header">
+                        <div class="search-box">
+                            <input type="text" id="note-search" placeholder="搜索笔记...">
+                            <button class="search-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="filter-options">
+                            <select id="note-category">
+                                <option value="">所有分类</option>
+                                <option value="课程笔记">课程笔记</option>
+                                <option value="备课资料">备课资料</option>
+                                <option value="教学反思">教学反思</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 笔记列表 -->
+                    <div class="notes-list" id="notes-list">
+                        <!-- 笔记项将通过JavaScript动态生成 -->
+                        <div class="note-item active">
+                            <div class="note-info">
+                                <h3>Maya建模课程笔记</h3>
+                                <p>多边形建模的基本技巧和工作流程...</p>
+                                <div class="note-meta">
+                                    <span class="category">课程笔记</span>
+                                    <span class="date">2026-02-05</span>
+                                    <span class="time">14:30</span>
+                                </div>
+                            </div>
+                            <div class="note-actions">
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="note-item">
+                            <div class="note-info">
+                                <h3>材质与渲染备课</h3>
+                                <p>PBR材质设置和Arnold渲染器参数调整...</p>
+                                <div class="note-meta">
+                                    <span class="category">备课资料</span>
+                                    <span class="date">2026-02-04</span>
+                                    <span class="time">10:15</span>
+                                </div>
+                            </div>
+                            <div class="note-actions">
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="note-item">
+                            <div class="note-info">
+                                <h3>动画原理教学反思</h3>
+                                <p>学生在学习动画原理时的常见问题和解决方案...</p>
+                                <div class="note-meta">
+                                    <span class="category">教学反思</span>
+                                    <span class="date">2026-02-03</span>
+                                    <span class="time">16:45</span>
+                                </div>
+                            </div>
+                            <div class="note-actions">
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧编辑器 -->
+                <div class="notes-editor">
+                    <!-- 编辑器工具栏 -->
+                    <div class="editor-header">
+                        <input type="text" id="note-title" placeholder="笔记标题" class="note-title-input">
+                        <div class="editor-actions">
+                            <select id="note-category-select" class="category-select">
+                                <option value="课程笔记">课程笔记</option>
+                                <option value="备课资料">备课资料</option>
+                                <option value="教学反思">教学反思</option>
+                                <option value="其他">其他</option>
+                            </select>
+                            <button class="btn btn-outline" id="save-note-btn">
+                                <i class="fas fa-save"></i> 保存
+                            </button>
+                            <button class="btn btn-primary" id="share-note-btn">
+                                <i class="fas fa-share-alt"></i> 分享
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 富文本编辑器 -->
+                    <div class="editor-content">
+                        <div id="editor"></div>
+                    </div>
+
+                    <!-- 编辑器底部 -->
+                    <div class="editor-footer">
+                        <div class="note-meta-info">
+                            <span id="note-created"></span>
+                            <span id="note-updated"></span>
+                        </div>
+                        <div class="editor-tools">
+                            <button class="btn btn-sm btn-outline" id="export-note-btn">
+                                <i class="fas fa-download"></i> 导出
+                            </button>
+                            <button class="btn btn-sm btn-outline" id="print-note-btn">
+                                <i class="fas fa-print"></i> 打印
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新建笔记模态框 -->
+    <div class="modal" id="create-note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新建笔记</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="create-note-form">
+                    <div class="form-group">
+                        <label for="new-note-title">笔记标题 *</label>
+                        <input type="text" id="new-note-title" required placeholder="输入笔记标题">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-note-category">分类 *</label>
+                        <select id="new-note-category" required>
+                            <option value="课程笔记">课程笔记</option>
+                            <option value="备课资料">备课资料</option>
+                            <option value="教学反思">教学反思</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-note-tags">标签</label>
+                        <input type="text" id="new-note-tags" placeholder="输入标签，用逗号分隔">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-note-content">内容</label>
+                        <textarea id="new-note-content" rows="4" placeholder="输入笔记内容"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-create-note">取消</button>
+                <button class="btn btn-primary" id="submit-create-note">创建笔记</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分享笔记模态框 -->
+    <div class="modal" id="share-note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>分享笔记</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="share-options">
+                    <div class="share-link">
+                        <label>分享链接</label>
+                        <div class="link-container">
+                            <input type="text" id="note-share-link" readonly>
+                            <button class="copy-btn" id="copy-share-link">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="share-platforms">
+                        <label>分享到</label>
+                        <div class="platform-buttons">
+                            <button class="platform-btn" data-platform="wechat">
+                                <i class="fab fa-weixin"></i> 微信
+                            </button>
+                            <button class="platform-btn" data-platform="qq">
+                                <i class="fab fa-qq"></i> QQ
+                            </button>
+                            <button class="platform-btn" data-platform="email">
+                                <i class="fas fa-envelope"></i> 邮件
+                            </button>
+                            <button class="platform-btn" data-platform="copy">
+                                <i class="fas fa-link"></i> 复制链接
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="close-share-modal">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导出笔记模态框 -->
+    <div class="modal" id="export-note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>导出笔记</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="export-options">
+                    <p>选择导出格式：</p>
+                    <div class="format-buttons">
+                        <button class="format-btn" data-format="html">
+                            <i class="fas fa-file-code"></i> HTML
+                        </button>
+                        <button class="format-btn" data-format="markdown">
+                            <i class="fas fa-file-markdown"></i> Markdown
+                        </button>
+                        <button class="format-btn" data-format="text">
+                            <i class="fas fa-file-alt"></i> 纯文本
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-export">取消</button>
+                <button class="btn btn-primary" id="confirm-export">导出</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除笔记确认模态框 -->
+    <div class="modal" id="delete-note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除此笔记吗？此操作不可恢复。</p>
+                <p class="delete-note-title">笔记标题：Maya建模课程笔记</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-delete-note">取消</button>
+                <button class="btn btn-danger" id="confirm-delete-note">删除</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Maya教学平台</h3>
+                    <p>专为三维动画教师打造的备课资料管理系统</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/courses.html">课程管理</a></li>
+                        <li><a href="/materials.html">资料管理</a></li>
+                        <li><a href="/notes.html">教学笔记</a></li>
+                        <li><a href="/maya.html">Maya工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@maya-teaching.com</li>
+                        <li><i class="fas fa-phone"></i> +86 123 4567 8910</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Maya教学平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+    <script src="/js/notes.js"></script>
+</body>
+</html>

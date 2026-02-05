@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya三维动画讲课平台</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <i class="fas fa-cube"></i>
+                <span>Maya教学平台</span>
+            </div>
+            <div class="navbar-links">
+                <a href="/" class="nav-link active" data-section="home">首页</a>
+                <a href="/courses.html" class="nav-link" data-section="courses">课程管理</a>
+                <a href="/materials.html" class="nav-link" data-section="materials">资料管理</a>
+                <a href="/notes.html" class="nav-link" data-section="notes">教学笔记</a>
+                <a href="/maya.html" class="nav-link" data-section="maya">Maya工具</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-outline" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-primary" id="add-content">
+                    <i class="fas fa-plus"></i> 新建
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Maya三维动画教学平台</h1>
+                <p>专为教师打造的备课资料管理系统，让您的教学更高效、更专业</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg" data-section="courses">
+                        <i class="fas fa-book"></i> 浏览课程
+                    </button>
+                    <button class="btn btn-secondary btn-lg" data-section="materials">
+                        <i class="fas fa-folder-open"></i> 管理资料
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20animation%20workstation%20with%20Maya%20software%20interface%2C%20professional%203D%20modeling%20and%20animation%20setup%2C%20blue%20lighting%2C%20modern%20design&image_size=landscape_16_9" alt="Maya三维动画教学">
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速访问 -->
+    <section class="quick-access">
+        <div class="container">
+            <h2>快速访问</h2>
+            <div class="quick-access-grid">
+                <div class="quick-access-item" data-section="courses">
+                    <div class="icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>课程管理</h3>
+                    <p>创建和管理Maya相关课程</p>
+                </div>
+                <div class="quick-access-item" data-section="materials">
+                    <div class="icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3>资料管理</h3>
+                    <p>上传和组织备课资料</p>
+                </div>
+                <div class="quick-access-item" data-section="notes">
+                    <div class="icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <h3>教学笔记</h3>
+                    <p>整理教学心得和知识点</p>
+                </div>
+                <div class="quick-access-item" data-section="maya">
+                    <div class="icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>Maya工具</h3>
+                    <p>命令参考和快捷键指南</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最近课程 -->
+    <section class="recent-courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>最近课程</h2>
+                <a href="#" class="view-all" data-section="courses">查看全部</a>
+            </div>
+            <div class="courses-grid" id="recent-courses-container">
+                <!-- 课程卡片将通过JavaScript动态生成 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20modeling%20tutorial%20concept%20art%2C%20Maya%20software%20interface%2C%20professional%203D%20modeling%20workflow&image_size=square" alt="Maya建模基础">
+                    </div>
+                    <div class="course-content">
+                        <h3>Maya建模基础</h3>
+                        <p>掌握多边形建模的基本技巧和工作流程</p>
+                        <div class="course-meta">
+                            <span class="category">建模</span>
+                            <span class="date">2026-02-01</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20animation%20tutorial%20concept%2C%20character%20animation%20in%20Maya%2C%20keyframe%20animation%20workflow&image_size=square" alt="Maya动画基础">
+                    </div>
+                    <div class="course-content">
+                        <h3>Maya动画基础</h3>
+                        <p>学习关键帧动画和角色动画的基本原理</p>
+                        <div class="course-meta">
+                            <span class="category">动画</span>
+                            <span class="date">2026-01-28</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20texturing%20and%20shading%20tutorial%2C%20Maya%20material%20editor%2C%20PBR%20workflow&image_size=square" alt="Maya材质与渲染">
+                    </div>
+                    <div class="course-content">
+                        <h3>Maya材质与渲染</h3>
+                        <p>掌握PBR材质和Arnold渲染的高级技巧</p>
+                        <div class="course-meta">
+                            <span class="category">材质/渲染</span>
+                            <span class="date">2026-01-25</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最近资料 -->
+    <section class="recent-materials">
+        <div class="container">
+            <div class="section-header">
+                <h2>最近上传</h2>
+                <a href="#" class="view-all" data-section="materials">查看全部</a>
+            </div>
+            <div class="materials-list" id="recent-materials-container">
+                <!-- 资料列表将通过JavaScript动态生成 -->
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="material-info">
+                        <h4>Maya 2024新功能详解.pdf</h4>
+                        <p>详细介绍Maya 2024版本的新功能和改进</p>
+                    </div>
+                    <div class="material-meta">
+                        <span class="size">2.5 MB</span>
+                        <span class="date">2026-02-05</span>
+                    </div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-file-video"></i>
+                    </div>
+                    <div class="material-info">
+                        <h4>角色绑定教程.mp4</h4>
+                        <p>Maya角色绑定的完整工作流程教程</p>
+                    </div>
+                    <div class="material-meta">
+                        <span class="size">150 MB</span>
+                        <span class="date">2026-02-04</span>
+                    </div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon">
+                        <i class="fas fa-file-image"></i>
+                    </div>
+                    <div class="material-info">
+                        <h4>材质参考图片.zip</h4>
+                        <p>常用PBR材质纹理参考图片集合</p>
+                    </div>
+                    <div class="material-meta">
+                        <span class="size">35 MB</span>
+                        <span class="date">2026-02-03</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maya工具亮点 -->
+    <section class="maya-features">
+        <div class="container">
+            <h2>Maya专用工具</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <h3>命令参考</h3>
+                    <p>完整的Maya命令参考手册，包含语法和示例</p>
+                    <a href="#" class="feature-link" data-section="maya">
+                        查看详情 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3>快捷键指南</h3>
+                    <p>常用Maya快捷键整理，提高工作效率</p>
+                    <a href="#" class="feature-link" data-section="maya">
+                        查看详情 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>插件推荐</h3>
+                    <p>精选Maya插件推荐，提升工作流效率</p>
+                    <a href="#" class="feature-link" data-section="maya">
+                        查看详情 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Maya教学平台</h3>
+                    <p>专为三维动画教师打造的备课资料管理系统</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#" data-section="home">首页</a></li>
+                        <li><a href="#" data-section="courses">课程管理</a></li>
+                        <li><a href="#" data-section="materials">资料管理</a></li>
+                        <li><a href="#" data-section="notes">教学笔记</a></li>
+                        <li><a href="#" data-section="maya">Maya工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@maya-teaching.com</li>
+                        <li><i class="fas fa-phone"></i> +86 123 4567 8910</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Maya教学平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 模态框 -->
+    <div class="modal" id="add-content-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新建内容</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-options">
+                    <div class="modal-option" data-type="course">
+                        <i class="fas fa-book"></i>
+                        <span>新建课程</span>
+                    </div>
+                    <div class="modal-option" data-type="material">
+                        <i class="fas fa-folder-open"></i>
+                        <span>上传资料</span>
+                    </div>
+                    <div class="modal-option" data-type="note">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>新建笔记</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

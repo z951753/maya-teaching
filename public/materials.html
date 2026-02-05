@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资料管理 - Maya三维动画讲课平台</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/materials.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <i class="fas fa-cube"></i>
+                <span>Maya教学平台</span>
+            </div>
+            <div class="navbar-links">
+                <a href="/" class="nav-link" data-section="home">首页</a>
+                <a href="/courses.html" class="nav-link" data-section="courses">课程管理</a>
+                <a href="/materials.html" class="nav-link active" data-section="materials">资料管理</a>
+                <a href="/notes.html" class="nav-link" data-section="notes">教学笔记</a>
+                <a href="/maya.html" class="nav-link" data-section="maya">Maya工具</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-outline" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-primary" id="upload-material-btn">
+                    <i class="fas fa-upload"></i> 上传资料
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>资料管理</h1>
+            <p>上传和管理Maya三维动画相关资料</p>
+        </div>
+    </section>
+
+    <!-- 资料列表 -->
+    <section class="materials-section">
+        <div class="container">
+            <!-- 搜索和筛选 -->
+            <div class="materials-filter">
+                <div class="search-box">
+                    <input type="text" id="material-search" placeholder="搜索资料...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select id="material-category">
+                        <option value="">所有分类</option>
+                        <option value="教程">教程</option>
+                        <option value="模型">模型</option>
+                        <option value="材质">材质</option>
+                        <option value="视频">视频</option>
+                        <option value="文档">文档</option>
+                        <option value="其他">其他</option>
+                    </select>
+                    <select id="material-type">
+                        <option value="">所有类型</option>
+                        <option value="pdf">PDF</option>
+                        <option value="video">视频</option>
+                        <option value="image">图片</option>
+                        <option value="3d">3D模型</option>
+                        <option value="zip">压缩包</option>
+                    </select>
+                    <select id="material-sort">
+                        <option value="created_at">上传时间</option>
+                        <option value="name">文件名称</option>
+                        <option value="size">文件大小</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 拖拽上传区域 -->
+            <div class="drag-drop-area" id="drag-drop-area">
+                <div class="drag-drop-content">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>拖拽文件到这里上传</h3>
+                    <p>支持 PDF、视频、图片、3D模型等多种格式</p>
+                    <button class="btn btn-primary" id="browse-files-btn">浏览文件</button>
+                    <input type="file" id="file-input" multiple style="display: none;">
+                </div>
+            </div>
+
+            <!-- 资料网格 -->
+            <div class="materials-grid" id="materials-container">
+                <!-- 资料卡片将通过JavaScript动态生成 -->
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>Maya建模基础教程.pdf</h3>
+                        <p>详细介绍Maya多边形建模的基本技巧和工作流程</p>
+                        <div class="material-meta">
+                            <span class="category">教程</span>
+                            <span class="size">2.5 MB</span>
+                            <span class="date">2026-02-05</span>
+                        </div>
+                        <div class="material-tags">
+                            <span class="tag">建模</span>
+                            <span class="tag">基础</span>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn btn-sm btn-primary view-material" data-id="mat_1">
+                                <i class="fas fa-eye"></i> 预览
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-material" data-id="mat_1">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-material" data-id="mat_1">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-file-video"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>角色绑定教程.mp4</h3>
+                        <p>Maya角色绑定的完整工作流程教程</p>
+                        <div class="material-meta">
+                            <span class="category">视频</span>
+                            <span class="size">150 MB</span>
+                            <span class="date">2026-02-04</span>
+                        </div>
+                        <div class="material-tags">
+                            <span class="tag">动画</span>
+                            <span class="tag">绑定</span>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn btn-sm btn-primary view-material" data-id="mat_2">
+                                <i class="fas fa-play"></i> 播放
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-material" data-id="mat_2">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-material" data-id="mat_2">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-file-image"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>材质参考图片.zip</h3>
+                        <p>常用PBR材质纹理参考图片集合</p>
+                        <div class="material-meta">
+                            <span class="category">材质</span>
+                            <span class="size">35 MB</span>
+                            <span class="date">2026-02-03</span>
+                        </div>
+                        <div class="material-tags">
+                            <span class="tag">材质</span>
+                            <span class="tag">PBR</span>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn btn-sm btn-primary download-material" data-id="mat_3">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-material" data-id="mat_3">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-material" data-id="mat_3">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>科幻场景模型.fbx</h3>
+                        <p>高质量的科幻场景3D模型</p>
+                        <div class="material-meta">
+                            <span class="category">模型</span>
+                            <span class="size">85 MB</span>
+                            <span class="date">2026-02-02</span>
+                        </div>
+                        <div class="material-tags">
+                            <span class="tag">模型</span>
+                            <span class="tag">科幻</span>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn btn-sm btn-primary download-material" data-id="mat_4">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="btn btn-sm btn-secondary edit-material" data-id="mat_4">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-material" data-id="mat_4">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination" id="material-pagination">
+                <button class="page-btn disabled"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 资料详情模态框 -->
+    <div class="modal" id="material-detail-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>资料详情</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="material-detail">
+                    <div class="detail-header">
+                        <div class="detail-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="detail-info">
+                            <h2 id="detail-material-name">Maya建模基础教程.pdf</h2>
+                            <p id="detail-material-description">详细介绍Maya多边形建模的基本技巧和工作流程</p>
+                            <div class="detail-meta">
+                                <span class="meta-item"><i class="fas fa-tag"></i> 教程</span>
+                                <span class="meta-item"><i class="fas fa-file"></i> PDF</span>
+                                <span class="meta-item"><i class="fas fa-weight"></i> 2.5 MB</span>
+                                <span class="meta-item"><i class="fas fa-calendar"></i> 2026-02-05</span>
+                            </div>
+                            <div class="detail-tags">
+                                <span class="tag">建模</span>
+                                <span class="tag">基础</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-content">
+                        <div class="preview-section">
+                            <h3><i class="fas fa-eye"></i> 文件预览</h3>
+                            <div class="preview-container" id="file-preview">
+                                <!-- 预览内容将通过JavaScript动态生成 -->
+                                <div class="preview-placeholder">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <p>点击下方按钮预览或下载文件</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="actions-section">
+                            <h3><i class="fas fa-tools"></i> 操作</h3>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary"><i class="fas fa-download"></i> 下载文件</button>
+                                <button class="btn btn-secondary"><i class="fas fa-share-alt"></i> 分享链接</button>
+                                <button class="btn btn-outline"><i class="fas fa-copy"></i> 复制链接</button>
+                            </div>
+                        </div>
+                        
+                        <div class="related-section">
+                            <h3><i class="fas fa-link"></i> 关联课程</h3>
+                            <div class="related-courses">
+                                <div class="related-course">
+                                    <i class="fas fa-book"></i>
+                                    <span>Maya建模基础</span>
+                                    <button class="link-course-btn">关联</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="edit-detail-material">编辑资料</button>
+                <button class="btn btn-danger" id="delete-detail-material">删除资料</button>
+                <button class="btn btn-primary" id="close-detail-modal">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 上传资料模态框 -->
+    <div class="modal" id="upload-material-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>上传资料</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="upload-material-form">
+                    <div class="form-group">
+                        <label for="upload-file">选择文件 *</label>
+                        <div class="file-upload">
+                            <input type="file" id="upload-file" required multiple>
+                            <label for="upload-file" class="file-upload-label">
+                                <i class="fas fa-upload"></i>
+                                <span>点击选择文件</span>
+                            </label>
+                            <div class="file-preview" id="upload-preview">
+                                <!-- 预览内容将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="material-name">文件名称</label>
+                        <input type="text" id="material-name" placeholder="自动填充，可修改">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="material-category">分类 *</label>
+                            <select id="material-category" required>
+                                <option value="">选择分类</option>
+                                <option value="教程">教程</option>
+                                <option value="模型">模型</option>
+                                <option value="材质">材质</option>
+                                <option value="视频">视频</option>
+                                <option value="文档">文档</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label for="material-tags">标签</label>
+                            <input type="text" id="material-tags" placeholder="输入标签，用逗号分隔">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="material-description">描述</label>
+                        <textarea id="material-description" rows="4" placeholder="输入文件描述"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="related-courses">关联课程</label>
+                        <select id="related-courses" multiple>
+                            <option value="course_1">Maya建模基础</option>
+                            <option value="course_2">Maya动画基础</option>
+                            <option value="course_3">Maya材质与渲染</option>
+                        </select>
+                        <small class="form-text">按住Ctrl键可多选</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-upload">取消</button>
+                <button class="btn btn-primary" id="submit-upload">开始上传</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑资料模态框 -->
+    <div class="modal" id="edit-material-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>编辑资料</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-material-form">
+                    <!-- 表单内容与上传资料相同，将通过JavaScript填充数据 -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-edit">取消</button>
+                <button class="btn btn-primary" id="submit-edit">保存更改</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除模态框 -->
+    <div class="modal" id="delete-confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除此资料吗？此操作不可恢复。</p>
+                <p class="delete-material-name">文件名称：Maya建模基础教程.pdf</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-delete">取消</button>
+                <button class="btn btn-danger" id="confirm-delete">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 上传进度模态框 -->
+    <div class="modal" id="upload-progress-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>上传进度</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span id="progress-percentage">0%</span>
+                        <span id="progress-file">正在上传：文件名称</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Maya教学平台</h3>
+                    <p>专为三维动画教师打造的备课资料管理系统</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/courses.html">课程管理</a></li>
+                        <li><a href="/materials.html">资料管理</a></li>
+                        <li><a href="/notes.html">教学笔记</a></li>
+                        <li><a href="/maya.html">Maya工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@maya-teaching.com</li>
+                        <li><i class="fas fa-phone"></i> +86 123 4567 8910</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Maya教学平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="/js/materials.js"></script>
+</body>
+</html>

@@ -1,0 +1,715 @@
+/* 资料管理页面样式 */
+
+/* 页面头部 */
+.page-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* 资料筛选区域 */
+.materials-filter {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 50px 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    outline: none;
+}
+
+.search-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background: var(--primary-dark);
+}
+
+.filter-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-options select {
+    padding: 10px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.filter-options select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* 拖拽上传区域 */
+.drag-drop-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 60px 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    background: var(--bg-secondary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.drag-drop-area:hover {
+    border-color: var(--primary);
+    background: rgba(66, 153, 225, 0.05);
+}
+
+.drag-drop-area.drag-over {
+    border-color: var(--primary);
+    background: rgba(66, 153, 225, 0.1);
+    transform: scale(1.01);
+}
+
+.drag-drop-content i {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.drag-drop-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.drag-drop-content p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+#browse-files-btn {
+    margin-top: 10px;
+}
+
+/* 资料网格 */
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.material-card {
+    background: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.material-icon {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.material-icon i {
+    font-size: 3rem;
+}
+
+.material-content {
+    padding: 20px;
+}
+
+.material-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.material-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.material-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+}
+
+.material-meta span {
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.material-meta .category {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.material-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.material-tags .tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: var(--secondary-light);
+    color: var(--secondary);
+    font-size: 0.8rem;
+}
+
+.material-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.material-actions .btn {
+    flex: 1;
+    min-width: 80px;
+}
+
+/* 分页 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 40px;
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-btn:hover:not(.disabled) {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.page-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 模态框样式 */
+.modal-content.modal-lg {
+    max-width: 900px;
+    width: 95%;
+}
+
+.modal-content.modal-md {
+    max-width: 600px;
+    width: 90%;
+}
+
+/* 资料详情样式 */
+.material-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.detail-header {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-icon {
+    font-size: 4rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.detail-info {
+    flex: 1;
+}
+
+.detail-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.detail-info p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.meta-item i {
+    color: var(--primary);
+}
+
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 预览区域 */
+.preview-section,
+.actions-section,
+.related-section {
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.preview-section h3,
+.actions-section h3,
+.related-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.preview-section h3 i,
+.actions-section h3 i,
+.related-section h3 i {
+    color: var(--primary);
+}
+
+.preview-container {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-placeholder i {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.preview-placeholder p {
+    color: var(--text-secondary);
+}
+
+/* 操作按钮 */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* 关联课程 */
+.related-courses {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.related-course {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.related-course i {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.related-course span {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.link-course-btn {
+    padding: 6px 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.link-course-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* 表单样式 */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group select[multiple] {
+    min-height: 120px;
+}
+
+.form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* 文件上传 */
+.file-upload {
+    position: relative;
+}
+
+.file-upload-label {
+    display: block;
+    text-align: center;
+    padding: 30px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload-label:hover {
+    border-color: var(--primary);
+    background: rgba(66, 153, 225, 0.05);
+}
+
+.file-upload-label i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.file-upload-label span {
+    display: block;
+}
+
+.file-preview {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.file-preview-item i {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.file-preview-info {
+    flex: 1;
+}
+
+.file-preview-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.file-preview-size {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.remove-file-btn {
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.remove-file-btn:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* 上传进度 */
+.progress-container {
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+/* 删除确认 */
+.delete-material-name {
+    font-weight: 500;
+    color: var(--danger);
+    margin-top: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .materials-filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        min-width: 100%;
+    }
+    
+    .filter-options {
+        justify-content: center;
+    }
+    
+    .materials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .detail-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+    }
+    
+    .material-actions {
+        flex-direction: column;
+    }
+    
+    .material-actions .btn {
+        width: 100%;
+    }
+    
+    .modal-content.modal-lg {
+        width: 95%;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .drag-drop-content i {
+        font-size: 3rem;
+    }
+    
+    .drag-drop-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .materials-grid {
+        gap: 15px;
+    }
+    
+    .detail-info h2 {
+        font-size: 1.5rem;
+    }
+    
+    .detail-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
