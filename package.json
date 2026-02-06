@@ -2,10 +2,10 @@
   "name": "maya-teaching",
   "version": "1.0.0",
   "description": "Maya三维动画讲课网站，用于整理备课资料",
-  "main": "server.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node api/index.js",
+    "dev": "node api/index.js"
   },
   "dependencies": {
     "express": "^4.18.2",
