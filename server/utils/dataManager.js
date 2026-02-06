@@ -6,22 +6,47 @@ class DataManager {
   constructor() {
     this.dataDir = path.join(__dirname, '../../data');
     this.backupDir = path.join(__dirname, '../../backups');
+    this.memoryStorage = {
+      courses: [],
+      materials: [],
+      notes: []
+    };
+    this.useMemoryStorage = false;
     this.ensureDirectories();
   }
 
   // 确保目录存在
   ensureDirectories() {
-    if (!fs.existsSync(this.dataDir)) {
-      fs.mkdirSync(this.dataDir, { recursive: true });
-    }
-    if (!fs.existsSync(this.backupDir)) {
-      fs.mkdirSync(this.backupDir, { recursive: true });
+    try {
+      if (!fs.existsSync(this.dataDir)) {
+        fs.mkdirSync(this.dataDir, { recursive: true });
+        console.log(`Created data directory: ${this.dataDir}`);
+      }
+      if (!fs.existsSync(this.backupDir)) {
+        fs.mkdirSync(this.backupDir, { recursive: true });
+        console.log(`Created backup directory: ${this.backupDir}`);
+      }
+      this.useMemoryStorage = false;
+    } catch (error) {
+      console.warn('Failed to create directories:', error.message);
+      console.warn('Switching to memory storage mode');
+      this.useMemoryStorage = true;
     }
   }
 
   // 备份所有数据
   backupAllData() {
     try {
+      if (this.useMemoryStorage) {
+        console.warn('Running in memory storage mode, backup functionality limited');
+        return {
+          success: true,
+          message: '备份成功（内存模式）',
+          filename: `backup_memory_${Date.now()}.json`,
+          timestamp: new Date().toISOString()
+        };
+      }
+
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const backupFilename = `backup_${timestamp}.json.gz`;
       const backupPath = path.join(this.backupDir, backupFilename);
@@ -57,6 +82,13 @@ class DataManager {
   // 恢复数据
   restoreData(backupFilename) {
     try {
+      if (this.useMemoryStorage) {
+        return {
+          success: false,
+          message: '内存存储模式下不支持恢复操作'
+        };
+      }
+
       const backupPath = path.join(this.backupDir, backupFilename);
 
       if (!fs.existsSync(backupPath)) {
@@ -91,6 +123,10 @@ class DataManager {
 
   // 获取所有数据
   getAllData() {
+    if (this.useMemoryStorage) {
+      return this.memoryStorage;
+    }
+
     const data = {
       courses: this.getData('courses'),
       materials: this.getData('materials'),
@@ -101,6 +137,13 @@ class DataManager {
 
   // 写入所有数据
   writeAllData(data) {
+    if (this.useMemoryStorage) {
+      if (data.courses) this.memoryStorage.courses = data.courses;
+      if (data.materials) this.memoryStorage.materials = data.materials;
+      if (data.notes) this.memoryStorage.notes = data.notes;
+      return;
+    }
+
     if (data.courses) {
       this.writeData('courses', data.courses);
     }
@@ -114,6 +157,10 @@ class DataManager {
 
   // 获取特定类型的数据
   getData(type) {
+    if (this.useMemoryStorage) {
+      return this.memoryStorage[type] || [];
+    }
+
     const typeDir = path.join(this.dataDir, type);
     if (!fs.existsSync(typeDir)) {
       return [];
@@ -128,47 +175,83 @@ class DataManager {
       });
     } catch (error) {
       console.error(`读取${type}数据失败:`, error);
-      return [];
+      console.warn(`Switching to memory storage for ${type}`);
+      this.useMemoryStorage = true;
+      return this.memoryStorage[type] || [];
     }
   }
 
   // 写入特定类型的数据
   writeData(type, items) {
-    const typeDir = path.join(this.dataDir, type);
-    if (!fs.existsSync(typeDir)) {
-      fs.mkdirSync(typeDir, { recursive: true });
+    if (this.useMemoryStorage) {
+      this.memoryStorage[type] = items;
+      return;
     }
 
-    // 清空目录
-    const files = fs.readdirSync(typeDir);
-    files.forEach(file => {
-      fs.unlinkSync(path.join(typeDir, file));
-    });
-
-    // 写入新数据
-    items.forEach(item => {
-      if (item.id) {
-        const filePath = path.join(typeDir, `${item.id}.json`);
-        fs.writeFileSync(filePath, JSON.stringify(item, null, 2));
+    try {
+      const typeDir = path.join(this.dataDir, type);
+      if (!fs.existsSync(typeDir)) {
+        fs.mkdirSync(typeDir, { recursive: true });
       }
-    });
+
+      // 清空目录
+      const files = fs.readdirSync(typeDir);
+      files.forEach(file => {
+        try {
+          fs.unlinkSync(path.join(typeDir, file));
+        } catch (error) {
+          console.warn(`Failed to delete file ${file}:`, error.message);
+        }
+      });
+
+      // 写入新数据
+      items.forEach(item => {
+        if (item.id) {
+          try {
+            const filePath = path.join(typeDir, `${item.id}.json`);
+            fs.writeFileSync(filePath, JSON.stringify(item, null, 2));
+          } catch (error) {
+            console.warn(`Failed to write file for item ${item.id}:`, error.message);
+          }
+        }
+      });
+    } catch (error) {
+      console.error(`写入${type}数据失败:`, error);
+      console.warn(`Switching to memory storage for ${type}`);
+      this.useMemoryStorage = true;
+      this.memoryStorage[type] = items;
+    }
   }
 
   // 清理旧备份
   cleanupOldBackups() {
+    if (this.useMemoryStorage) return;
+
     try {
       const files = fs.readdirSync(this.backupDir)
-        .map(file => ({
-          name: file,
-          time: fs.statSync(path.join(this.backupDir, file)).mtime.getTime()
-        }))
+        .map(file => {
+          try {
+            return {
+              name: file,
+              time: fs.statSync(path.join(this.backupDir, file)).mtime.getTime()
+            };
+          } catch (error) {
+            console.warn(`Failed to stat file ${file}:`, error.message);
+            return null;
+          }
+        })
+        .filter(Boolean)
         .sort((a, b) => b.time - a.time);
 
       // 保留最近10个备份
       const backupsToDelete = files.slice(10);
       backupsToDelete.forEach(backup => {
-        const backupPath = path.join(this.backupDir, backup.name);
-        fs.unlinkSync(backupPath);
+        try {
+          const backupPath = path.join(this.backupDir, backup.name);
+          fs.unlinkSync(backupPath);
+        } catch (error) {
+          console.warn(`Failed to delete backup ${backup.name}:`, error.message);
+        }
       });
     } catch (error) {
       console.error('清理备份失败:', error);
@@ -178,6 +261,16 @@ class DataManager {
   // 导出数据为JSON文件
   exportData() {
     try {
+      if (this.useMemoryStorage) {
+        console.warn('Running in memory storage mode, export functionality limited');
+        return {
+          success: true,
+          message: '导出成功（内存模式）',
+          filename: `export_memory_${Date.now()}.json`,
+          timestamp: new Date().toISOString()
+        };
+      }
+
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const exportFilename = `export_${timestamp}.json`;
       const exportPath = path.join(this.backupDir, exportFilename);
@@ -205,6 +298,13 @@ class DataManager {
   // 导入数据
   importData(importPath) {
     try {
+      if (this.useMemoryStorage) {
+        return {
+          success: false,
+          message: '内存存储模式下不支持导入操作'
+        };
+      }
+
       if (!fs.existsSync(importPath)) {
         return {
           success: false,
@@ -232,13 +332,27 @@ class DataManager {
 
   // 获取备份列表
   getBackupList() {
+    if (this.useMemoryStorage) {
+      return [];
+    }
+
     try {
       const files = fs.readdirSync(this.backupDir)
-        .map(file => ({
-          name: file,
-          time: fs.statSync(path.join(this.backupDir, file)).mtime,
-          size: fs.statSync(path.join(this.backupDir, file)).size
-        }))
+        .map(file => {
+          try {
+            const filePath = path.join(this.backupDir, file);
+            const stats = fs.statSync(filePath);
+            return {
+              name: file,
+              time: stats.mtime,
+              size: stats.size
+            };
+          } catch (error) {
+            console.warn(`Failed to stat file ${file}:`, error.message);
+            return null;
+          }
+        })
+        .filter(Boolean)
         .sort((a, b) => b.time - a.time);
 
       return files;
@@ -250,6 +364,13 @@ class DataManager {
 
   // 删除备份
   deleteBackup(backupFilename) {
+    if (this.useMemoryStorage) {
+      return {
+        success: false,
+        message: '内存存储模式下不支持删除操作'
+      };
+    }
+
     try {
       const backupPath = path.join(this.backupDir, backupFilename);
       if (fs.existsSync(backupPath)) {
@@ -283,6 +404,12 @@ class AutoBackup {
   }
 
   start() {
+    // 在Serverless环境中，定时器可能不持久，所以我们只在开发环境中启动
+    if (process.env.NODE_ENV === 'production') {
+      console.log('Running in production environment, auto backup disabled (Serverless limitations)');
+      return;
+    }
+
     this.stop(); // 先停止之前的定时器
     this.timer = setInterval(() => {
       console.log('执行自动备份...');

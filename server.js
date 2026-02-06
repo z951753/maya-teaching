@@ -27,35 +27,60 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 确保必要目录存在
-const requiredDirs = [
-  path.join(__dirname, 'temp'),
-  path.join(__dirname, 'data'),
-  path.join(__dirname, 'backups'),
-  path.join(__dirname, 'public', 'uploads')
-];
+function ensureDirectories() {
+  // 获取系统临时目录
+  const tempDir = process.env.TMPDIR || process.env.TEMP || process.env.TMP || '/tmp';
+  
+  const requiredDirs = [
+    path.join(tempDir, 'maya-teaching', 'temp'),
+    path.join(__dirname, 'data'),
+    path.join(__dirname, 'backups'),
+    path.join(__dirname, 'public', 'uploads')
+  ];
 
-requiredDirs.forEach(dir => {
-  if (!fs.existsSync(dir)) {
-    try {
-      fs.mkdirSync(dir, { recursive: true });
-      console.log(`Created directory: ${dir}`);
-    } catch (error) {
-      console.error(`Failed to create directory ${dir}:`, error);
+  requiredDirs.forEach(dir => {
+    if (!fs.existsSync(dir)) {
+      try {
+        fs.mkdirSync(dir, { recursive: true });
+        console.log(`Created directory: ${dir}`);
+      } catch (error) {
+        console.warn(`Failed to create directory ${dir}:`, error.message);
+        // 继续执行，不阻止应用启动
+      }
     }
-  }
-});
+  });
+  
+  return {
+    tempDir: path.join(tempDir, 'maya-teaching', 'temp')
+  };
+}
+
+// 初始化目录
+const dirs = ensureDirectories();
 
 // 文件上传配置
-app.use(fileUpload({
+const uploadOptions = {
   limits: {
     fileSize: 100 * 1024 * 1024, // 100MB
   },
   useTempFiles: true,
-  tempFileDir: path.join(__dirname, 'temp'),
+  tempFileDir: dirs.tempDir,
   createParentPath: true,
   safeFileNames: true,
   preserveExtension: true
-}));
+};
+
+try {
+  app.use(fileUpload(uploadOptions));
+  console.log('File upload middleware initialized successfully');
+} catch (error) {
+  console.warn('Failed to initialize file upload middleware:', error.message);
+  // 继续执行，不阻止应用启动
+  app.use((req, res, next) => {
+    req.files = {};
+    next();
+  });
+}
 
 // 静态文件服务
 app.use('/', express.static(path.join(__dirname, 'public')));
